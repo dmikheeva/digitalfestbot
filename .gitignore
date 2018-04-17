@@ -1,0 +1,15 @@
+gradlew
+gradlew.bat
+*.secret
+*.iml
+*.class
+*.out
+*.log
+
+.gradle/
+.idea/
+gradle/
+out/
+build/
+conf/
+log/

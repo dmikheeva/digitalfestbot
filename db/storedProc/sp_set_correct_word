@@ -1,0 +1,19 @@
+DELIMITER //
+drop procedure if exists setCorrectWord//
+CREATE PROCEDURE `setCorrectWord`(OUT amount INT, IN user_id INT, IN activity_id INT, IN word VARCHAR(256), IN action_id INT)
+LANGUAGE SQL
+DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'setCorrectWord'
+BEGIN
+	insert into user_words(user_id, activity_id, word)
+    values (user_id, activity_id, word);
+
+    update user_action u
+    set u.action_id = action_id
+    where u.user_id = id;
+
+    select count(*) into amount
+    from user_words uw
+    where uw.user_id = user_id;
+END//

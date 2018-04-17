@@ -1,0 +1,28 @@
+DELIMITER //
+drop procedure if exists createUser//
+CREATE PROCEDURE `createUser`(IN id INT, IN is_child TINYINT, IN user_name VARCHAR(255), IN action_id INT)
+LANGUAGE SQL
+DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'UserCreation'
+BEGIN
+DECLARE userCount int;
+    select count(id) into userCount
+    from users u
+    where u.id = id;
+    IF (userCount = 0) THEN
+    	insert into users(id, is_child, user_name)
+		values (id, is_child, user_name);
+
+		insert into user_action(action_id, user_id)
+		values (action_id, id);
+    ELSE
+		update users u
+        set u.is_child = is_child, age = null
+        where u.id = id;
+
+        update user_action ua
+        set ua.action_id = action_id
+        where ua.user_id = id;
+    END IF;
+END//

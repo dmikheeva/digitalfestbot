@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="filename">log/festBot.log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %C{1}.%M:%L - %m%n"/>
+        </Console>
+        <File name="FILE" fileName="${filename}">
+            <PatternLayout pattern="%d %p %C{1}.%M:%L - %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="ru.botik" level="trace" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="ru.botik" level="debug" additivity="true">
+            <AppenderRef ref="FILE"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

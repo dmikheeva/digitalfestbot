@@ -1,0 +1,16 @@
+DELIMITER //
+drop procedure if exists setChildAge//
+CREATE PROCEDURE `setChildAge`(IN id INT, IN age INT, IN action_id INT)
+LANGUAGE SQL
+DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'setChildAge'
+BEGIN
+	update users u
+    set u.age = age
+    where u.id = id;
+
+    update user_action u
+    set u.action_id = action_id
+    where u.user_id = id;
+END//
